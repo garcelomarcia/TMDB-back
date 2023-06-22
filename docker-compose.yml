@@ -13,3 +13,4 @@ services:
       - '3000:3000'
     depends_on:
       - db
+    command: /usr/local/bin/wait-for-it.sh -t 30 db:5432 -- npm start

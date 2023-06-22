@@ -13,15 +13,10 @@ RUN npm install
 # Copy the entire project directory to the container
 COPY . .
 
-# Expose the port that your Express app listens on
-EXPOSE 3000
+# Install PostgreSQL client and wait-for-it
+RUN apt-get update && apt-get install -y postgresql-client && \
+    wget -O /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
+    chmod +x /usr/local/bin/wait-for-it.sh
 
-# Define environment variables for PostgreSQL connection
-ENV DB_HOST=TMDB_Auth
-ENV DB_NAME=tmdb_auth
-
-# Install PostgreSQL client
-RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client
-
-# Wait for the PostgreSQL database to start
-CMD sleep 10 && node api/seed.js && npm start
+# Wait for the PostgreSQL database to start and then start the application
+CMD /usr/local/bin/wait-for-it.sh -t 30 db:5432 -- node api/seed.js && npm start
