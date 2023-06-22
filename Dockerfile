@@ -17,11 +17,11 @@ COPY . .
 EXPOSE 3000
 
 # Define environment variables for PostgreSQL connection
-ENV DB_HOST=TMDB_Auth\
-    DB_NAME=tmdb_auth
+ENV DB_HOST=TMDB_Auth
+ENV DB_NAME=tmdb_auth
 
 # Install PostgreSQL client
-RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client
 
 # Wait for the PostgreSQL database to start
 CMD sleep 10 && node api/seed.js && npm start
