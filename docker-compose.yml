@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: tmdb_auth
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    networks:
+      - tmdb_network
+
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    networks:
+      - tmdb_network
+
+networks:
+  tmdb_network:
+    driver: bridge
