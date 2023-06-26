@@ -27,25 +27,34 @@ router.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  User.findOne({ where: { username } }).then((user) => {
-    if (!user) return res.sendStatus(401);
-    user.validatePassword(password).then((isValid) => {
-      if (!isValid) return res.sendStatus(401);
-      console.log(user);
-      const payload = {
-        username: user.username,
-      };
+  try {
+    const user = await User.findOne({ where: { username } });
 
-      const token = generateToken(payload);
+    if (!user) {
+      return res.sendStatus(401);
+    }
 
-      res.cookie("token", token);
+    const isValid = await user.validatePassword(password);
 
-      res.send(payload);
-    });
-  });
+    if (!isValid) {
+      return res.sendStatus(401);
+    }
+
+    const payload = {
+      username: user.username,
+    };
+    console.log(payload);
+    const token = generateToken(payload);
+
+    res.setHeader("Set-Cookie", `token=${token}; SameSite=None; Secure`);
+    res.send(payload);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
 
 router.post("/signup", (req, res) => {

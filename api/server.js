@@ -21,15 +21,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
-app.use((req, res, next) => {
-  res.cookie("cookie_name", "cookie_value", {
-    sameSite: "none",
-    secure: true,
-  });
-  next();
-});
-
 app.use("/api", routes);
 app.use("/api/favorites", favorites);
 
