@@ -5,7 +5,7 @@ const sequelize = new Sequelize(
   process.env.POSTGRES_USER,
   process.env.POSTGRES_PASSWORD,
   {
-    host: "localhost", // Use the service name "db" as the host
+    host: "db", // Use the service name "db" as the host
     port: 5432,
     dialect: "postgres",
     logging: false,
