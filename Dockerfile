@@ -21,8 +21,10 @@ ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
-# Create the database using the PostgreSQL client
-RUN createdb -U postgres $POSTGRES_DB
+# Start the PostgreSQL service and create the database
+RUN service postgresql start \
+    && su - postgres -c "createdb $POSTGRES_DB" \
+    && service postgresql stop
 
 # Start the application
 CMD npm start
