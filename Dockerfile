@@ -22,9 +22,9 @@ ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
 # Start the PostgreSQL service and create the database
-RUN service postgresql start \
+RUN pg_ctl start \
     && su - postgres -c "createdb $POSTGRES_DB" \
-    && service postgresql stop
+    && pg_ctl stop
 
 # Start the application
 CMD npm start
