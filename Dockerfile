@@ -13,7 +13,7 @@ RUN npm install
 # Copy the entire project directory to the container
 COPY . .
 
-# Install PostgreSQL client and wait-for-it
+# Install PostgreSQL client
 RUN apt-get update && apt-get install -y postgresql-client 
 
 # Set environment variables for PostgreSQL connection
@@ -21,5 +21,10 @@ ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
-# Wait for the PostgreSQL database to start and then start the application
-CMD sleep 10 && npm start
+# Run the database setup and initialization commands
+RUN service postgresql start && \
+    psql -U postgres -c "CREATE DATABASE $POSTGRES_DB;" && \
+    service postgresql stop
+
+# Start the application
+CMD npm start
