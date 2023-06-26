@@ -1,6 +1,9 @@
 # Use an official Ubuntu base image
 FROM ubuntu:latest
 
+# Set the environment variable to prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install Node.js and npm
 RUN apt-get update && apt-get install -y nodejs npm
 
