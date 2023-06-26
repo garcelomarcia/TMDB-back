@@ -22,4 +22,4 @@ ENV POSTGRES_USER=$POSTGRES_USER
 ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 
 # Wait for the PostgreSQL database to start and then start the application
-CMD CREATEDB tmdb_auth
+CMD npm start
