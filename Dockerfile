@@ -9,6 +9,9 @@ ENV POSTGRES_PASSWORD=password
 # Copy SQL scripts to initialize the database
 COPY init-db.sql /docker-entrypoint-initdb.d/
 
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y nodejs npm
+
 # Set the working directory inside the container
 WORKDIR /app
 
