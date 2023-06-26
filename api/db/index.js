@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("tmdb_auth", "user", "password", {
-  host: "localhost", // Use the service name "db" as the host
+const sequelize = new Sequelize(process.env.POSTGRES_DB, process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD{
+  host: "db", // Use the service name "db" as the host
   port: 5432,
   dialect: "postgres",
   logging: false,
