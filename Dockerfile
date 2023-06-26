@@ -2,10 +2,7 @@
 FROM node:14
 
 # Set environment variables for PostgreSQL connection
-ENV POSTGRES_DB=tmdb_auth
-ENV POSTGRES_USER=user
-ENV POSTGRES_PASSWORD=ruPT0MCyrsLuTCnoCZR9Xpx9qzMS1btU
-ENV POSTGRES_HOST=dpg-cicvvmdiuie2ea1l9rd0-a
+ENV DATABASE_URL=postgres://user:ruPT0MCyrsLuTCnoCZR9Xpx9qzMS1btU@dpg-cicvvmdiuie2ea1l9rd0-a.ohio-postgres.render.com/tmdb_auth
 
 # Set the working directory inside the container
 WORKDIR /app
