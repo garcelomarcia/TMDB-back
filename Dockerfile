@@ -22,4 +22,4 @@ ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
 # Wait for the PostgreSQL database to start and then start the application
-CMD sleep 20 && npm start
+CMD sleep 10 && npm start
