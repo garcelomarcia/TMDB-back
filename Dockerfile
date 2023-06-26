@@ -1,17 +1,11 @@
-# Use the official PostgreSQL 12 image as the base
-FROM postgres:12
+# Use the official Node.js 14 image as the base
+FROM node:14
 
 # Set environment variables for PostgreSQL connection
 ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
-ENV POSTGRES_PASSWORD=password
-ENV POSTGRES_HOST=db
-
-# Copy SQL scripts to initialize the database
-COPY init-db.sql /docker-entrypoint-initdb.d/
-
-# Install Node.js and npm
-RUN apt-get update && apt-get install -y nodejs npm
+ENV POSTGRES_PASSWORD=ruPT0MCyrsLuTCnoCZR9Xpx9qzMS1btU
+ENV POSTGRES_HOST=dpg-cicvvmdiuie2ea1l9rd0-a
 
 # Set the working directory inside the container
 WORKDIR /app
