@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install Node.js and npm
 RUN apt-get update && apt-get install -y nodejs npm
 
-# Install PostgreSQL
-RUN apt-get install -y postgresql postgresql-contrib
+# Install PostgreSQL 12
+RUN apt-get install -y postgresql-12 postgresql-contrib-12
 
 # Set environment variables for PostgreSQL connection
 ENV POSTGRES_DB=tmdb_auth
