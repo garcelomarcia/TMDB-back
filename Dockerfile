@@ -14,17 +14,15 @@ RUN npm install
 COPY . .
 
 # Install PostgreSQL client
-RUN apt-get update && apt-get install -y postgresql-client 
+RUN apt-get update && apt-get install -y postgresql-client
 
 # Set environment variables for PostgreSQL connection
 ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
-# Run the database setup and initialization commands
-RUN service postgresql start && \
-    psql -U postgres -c "CREATE DATABASE tmdb_auth;" && \
-    service postgresql stop
+# Create the database using the PostgreSQL client
+RUN createdb -U postgres $POSTGRES_DB
 
 # Start the application
 CMD npm start
