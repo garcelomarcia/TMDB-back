@@ -5,6 +5,7 @@ FROM postgres:12
 ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
+ENV POSTGRES_HOST=db
 
 # Copy SQL scripts to initialize the database
 COPY init-db.sql /docker-entrypoint-initdb.d/
@@ -24,5 +25,8 @@ RUN npm install
 # Copy the entire project directory to the container
 COPY . .
 
+# Expose the port for your Node.js application
+EXPOSE 3000
+
 # Start the application
-CMD npm start
+CMD ["npm", "start"]
