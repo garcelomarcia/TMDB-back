@@ -14,9 +14,7 @@ RUN npm install
 COPY . .
 
 # Install PostgreSQL client and wait-for-it
-RUN apt-get update && apt-get install -y postgresql-client && \
-    wget -O /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-    chmod +x /usr/local/bin/wait-for-it.sh
+RUN apt-get update && apt-get install -y postgresql-client 
 
 # Wait for the PostgreSQL database to start and then start the application
-CMD /usr/local/bin/wait-for-it.sh -t 30 db:5432 -- node api/seed.js && npm start
+CMD npm start
