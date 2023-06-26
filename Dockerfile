@@ -15,5 +15,10 @@ WORKDIR /app
 # Install project dependencies
 RUN npm install
 
+# Start the PostgreSQL service and create the database
+RUN service postgresql start && \
+    su - postgres -c "createdb $POSTGRES_DB" && \
+    service postgresql stop
+
 # Start the application
 CMD npm start
