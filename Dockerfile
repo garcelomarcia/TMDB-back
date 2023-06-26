@@ -17,9 +17,9 @@ COPY . .
 RUN apt-get update && apt-get install -y postgresql-client 
 
 # Set environment variables for PostgreSQL connection
-ENV POSTGRES_DB=$POSTGRES_DB
-ENV POSTGRES_USER=$POSTGRES_USER
-ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+ENV POSTGRES_DB=tmdb_auth
+ENV POSTGRES_USER=user
+ENV POSTGRES_PASSWORD=password
 
 # Wait for the PostgreSQL database to start and then start the application
-CMD npm start
+CMD sleep 20 && npm start
