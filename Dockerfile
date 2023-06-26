@@ -15,8 +15,9 @@ ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
-# Start the PostgreSQL service and create the database
-RUN pg_ctlcluster 12 main start && \
+# Initialize and start the PostgreSQL cluster
+RUN pg_createcluster 12 main && \
+    pg_ctlcluster 12 main start && \
     su - postgres -c "createdb $POSTGRES_DB" && \
     pg_ctlcluster 12 main stop
 
