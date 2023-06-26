@@ -8,9 +8,28 @@ const db = require("./db");
 
 const app = express();
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "https://localhost:3000",
+      "https://tmdb-front-garcelomarcia.vercel.app",
+    ], // Replace with your front-end URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+  res.cookie("cookie_name", "cookie_value", {
+    sameSite: "none",
+    secure: true,
+  });
+  next();
+});
+
 app.use("/api", routes);
 app.use("/api/favorites", favorites);
 
