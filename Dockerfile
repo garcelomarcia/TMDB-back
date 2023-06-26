@@ -1,25 +1,13 @@
-# Use an official Ubuntu base image
-FROM ubuntu:latest
-
-# Set the environment variable to prevent interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install Node.js and npm
-RUN apt-get update && apt-get install -y nodejs npm
-
-# Install PostgreSQL 12
-RUN apt-get install -y postgresql-12 postgresql-contrib-12
+# Use the official PostgreSQL 12 image as the base
+FROM postgres:12
 
 # Set environment variables for PostgreSQL connection
 ENV POSTGRES_DB=tmdb_auth
 ENV POSTGRES_USER=user
 ENV POSTGRES_PASSWORD=password
 
-# Initialize and start the PostgreSQL cluster
-RUN pg_createcluster 12 main && \
-    pg_ctlcluster 12 main start && \
-    su - postgres -c "createdb $POSTGRES_DB" && \
-    pg_ctlcluster 12 main stop
+# Copy SQL scripts to initialize the database
+COPY init-db.sql /docker-entrypoint-initdb.d/
 
 # Set the working directory inside the container
 WORKDIR /app
