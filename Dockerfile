@@ -23,7 +23,7 @@ ENV POSTGRES_PASSWORD=password
 
 # Run the database setup and initialization commands
 RUN service postgresql start && \
-    psql -U postgres -c "CREATE DATABASE $POSTGRES_DB;" && \
+    psql -U postgres -c "CREATE DATABASE tmdb_auth;" && \
     service postgresql stop
 
 # Start the application
