@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
     console.log(payload);
     const token = generateToken(payload);
 
-    res.setHeader("Set-Cookie", `token=${token}; SameSite=None; Secure`);
+    res.setHeader("Set-Cookie", `token=${token}; SameSite=Lax; Secure`);
     res.send(payload);
   } catch (error) {
     console.error(error);
