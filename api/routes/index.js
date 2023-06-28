@@ -46,11 +46,8 @@ router.post("/login", async (req, res) => {
     const payload = {
       username: user.username,
     };
-    console.log(payload);
     const token = generateToken(payload);
-
-    res.setHeader("Set-Cookie", `token=${token}; SameSite=Lax; Secure`);
-    res.send(payload);
+    res.send(token);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
