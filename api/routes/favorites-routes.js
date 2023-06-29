@@ -3,7 +3,7 @@ const express = require("express");
 
 let router = express.Router();
 
-router.post("/", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   const { username } = req.body;
   const user = await User.findOne({
     where: {
