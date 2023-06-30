@@ -1,9 +1,11 @@
 const express = require("express");
+const path = require("path");
 
 let router = express.Router();
 
 router.get("/linkbase", (req, res) => {
-  res.sendFile("./api/assets/1681499893886.mp4");
+  const videoFilePath = path.join(__dirname, "../api/assets/1681499893886.mp4");
+  res.sendFile(videoFilePath);
 });
 
 module.exports = router;

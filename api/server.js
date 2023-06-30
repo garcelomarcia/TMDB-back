@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api", routes);
 app.use("/api/favorites", favorites);
-app.use("api/videos", videos);
+app.use("/api/videos", videos);
 
 const PORT = process.env.PORT || 3000;
 
