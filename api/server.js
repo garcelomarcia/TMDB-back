@@ -14,6 +14,7 @@ app.use(
     origin: [
       "https://localhost:3000",
       "https://tmdb-front-garcelomarcia.vercel.app",
+      "https://portfolio-garcelomarcia.vercel.app",
     ], // Replace with your front-end URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
