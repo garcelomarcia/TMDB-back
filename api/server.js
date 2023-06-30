@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const routes = require("./routes");
 const favorites = require("./routes/favorites-routes");
+const videos = require("./routes/videos");
 const cookieParser = require("cookie-parser");
 const db = require("./db");
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api", routes);
 app.use("/api/favorites", favorites);
+app.use("api/videos", videos);
 
 const PORT = process.env.PORT || 3000;
 
